@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+"use strict";
+
+var server = require("../index");
+
+if (require.main === module) {
+  main();
+}
+
+function main() {
+  var port = process.env.PORT || 3000;
+  server.listen(port, function() {
+    console.log("Listening on port: " + port);
+  });
+}
