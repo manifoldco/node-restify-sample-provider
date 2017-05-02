@@ -12,7 +12,9 @@
   "dependencies": {
     "@manifoldco/signature": "^1.0.0",
     "lodash": "^4.17.4",
+    "request": "^2.81.0",
     "restify": "^4.3.0",
+    "restify-memory-session": "0.0.6",
     "restify-plugins": "^1.6.0"
   }
 }
