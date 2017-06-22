@@ -19,12 +19,14 @@ To use Grafton to verify this sample provider:
 # this file is written as masterkey.json
 grafton generate
 
-# Set environment variables to configure the test app
-# MASTER_KEY is the public_key portion of masterkey.json
-export MASTER_KEY="TtziSVE/9lnZ7fRYhWtGZpuXUKJ82FunK9rM0IkuP/0"
+# MASTER_KEY is the public key creating by the grafton generate command
+# Make sure to update this value after running grafton generate.
+export MASTER_KEY=2LABDMv5jA2pIIF1+HoFk/5ilsfKTrMLOEQbrAAeA2E=
+
 # CONNECTOR_URL is the url that Grafton will listen on. It corresponds to
 # Grafton's --sso-port flag.
-export CONNECTOR_URL=http://localhost:3001/v1
+export CONNECTOR_PORT=3001
+export CONNECTOR_URL=http://localhost:$CONNECTOR_PORT
 
 # Set fake OAuth 2.0 credentials. The format of these are specific, so you can
 # reuse the values here.
@@ -37,11 +39,11 @@ npm start
 
 # In another shell, run grafton.
 grafton test --product=bonnets --plan=small --region=aws::us-east-1 \
-    --client-id=21jtaatqj8y5t0kctb2ejr6jev5w8 \
-    --client-secret=3yTKSiJ6f5V5Bq-kWF0hmdrEUep3m3HKPTcPX7CdBZw \
-    --connector-port=3001 \
+    --client-id=$CLIENT_ID \
+    --client-secret=$CLIENT_SECRET \
+    --connector-port=$CONNECTOR_PORT \
     --new-plan=large \
-    http://localhost:4567
+    $CONNECTOR_URL
 
 # If everything went well, you'll be greeted with plenty of green check marks!
 ```

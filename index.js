@@ -49,7 +49,7 @@ server.get("/dashboard", function(req, res, next) {
   }
 
   request.get({
-    url: CONNECTOR_URL + "/users/self",
+    url: CONNECTOR_URL + "/v1/users/self",
     headers: {
       authorization: "Bearer " + req.session.token,
     }
@@ -80,6 +80,11 @@ server.get("/v1/sso", function(req, res, next) {
     if (err || (resp.body && resp.body.error)) {
       res.statusCode = 401;
       return res.send("This is a page that the user would see");
+    }
+
+    if (resp.statusCode !== 200) {
+      res.statusCode = 500;
+      return res.send("Could not complete request authentication")
     }
     req.session.token = resp.body.access_token;
     req.session.resource = req.query.resource_id;
@@ -161,7 +166,7 @@ server.put("/v1/credentials/:id", verifyMiddleware, function(req, res, next) {
   res.json({
     message: "your cat bonnet password is ready",
     credentials: {
-      password: "meow",
+      PASSWORD: "meow",
     },
   });
 });
