@@ -153,6 +153,23 @@ server.del("/v1/resources/:id", verifyMiddleware, function(req, res, next) {
   res.end();
 });
 
+// Get measures resource
+server.get("/v1/resources/:id/measures", verifyMiddleware, function(req, res, next) {
+  var resource = db.resources[req.params.id];
+  if (!resource) {
+    res.statusCode = 404;
+    return res.json({ message: "no such resource" });
+  }
+
+  res.statusCode = 200;
+  res.json({
+    resource_id: req.params.id,
+    period_start: "2018-05-01T00:00:00.000Z",
+    period_end: "2018-05-31T23:59:59.000Z",
+    measures: { "feature-a": 0, "feature-b": 1000 }
+  });
+});
+
 // Create credential
 server.put("/v1/credentials/:id", verifyMiddleware, function(req, res, next) {
   var resource = db.resources[req.body.resource_id];
