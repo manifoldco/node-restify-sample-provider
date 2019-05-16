@@ -164,9 +164,9 @@ server.get("/v1/resources/:id/measures", verifyMiddleware, function(req, res, ne
   res.statusCode = 200;
   res.json({
     resource_id: req.params.id,
-    period_start: "2018-05-01T00:00:00.000Z",
-    period_end: "2018-05-31T23:59:59.000Z",
-    measures: { "feature-a": 0, "feature-b": 1000 }
+    period_start: req.query["period_start"],
+    period_end: req.query["period_end"],
+    measures: { "storage": 30, "processing-time": 5 } // 30 GB, used for 5 hours.
   });
 });
 
