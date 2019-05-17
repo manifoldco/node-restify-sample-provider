@@ -43,6 +43,7 @@ grafton test --product=bonnets --plan=small --region=aws::us-east-1 \
     --client-secret=$CLIENT_SECRET \
     --connector-port=$CONNECTOR_PORT \
     --new-plan=large \
+    --resource-measures "{\"storage\": 30, \"processing-time\": 5}" \
     http://localhost:4567
 
 # If everything went well, you'll be greeted with plenty of green check marks!
