@@ -82,7 +82,8 @@ server.get("/v1/sso", function(req, res, next) {
       return res.send("This is a page that the user would see");
     }
 
-    if (resp.statusCode !== 200) {
+    if (resp.statusCode !== 201) {
+      console.error("Error on connector call", resp.statusCode, resp.body);
       res.statusCode = 500;
       return res.send("Could not complete request authentication")
     }
@@ -183,7 +184,7 @@ server.put("/v1/credentials/:id", verifyMiddleware, function(req, res, next) {
   res.json({
     message: "your cat bonnet password is ready",
     credentials: {
-      PASSWORD: "meow",
+      PASSWORD: `meow-${Date.now()}` ,
     },
   });
 });
