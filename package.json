@@ -12,7 +12,7 @@
   "dependencies": {
     "@manifoldco/signature": "^1.0.0",
     "basic-auth": "1.1.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "request": "^2.81.0",
     "restify": "^4.3.0",
     "restify-memory-session": "0.0.6",
